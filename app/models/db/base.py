@@ -1,7 +1,6 @@
-import uuid
 
 from pydantic import BaseModel
-from sqlalchemy import String, DateTime, UUID, func
+from sqlalchemy import String, DateTime, UUID, func, Column
 from sqlalchemy.orm import DeclarativeBase, declared_attr, Mapped, mapped_column
 
 
@@ -15,9 +14,9 @@ class Base(DeclarativeBase):
     def __tablename__(cls):
         return f"{cls.__name__.lower()}"
 
-    id: Mapped[str] = mapped_column(UUID(as_uuid=False), primary_key=True, default=lambda _: str(uuid.uuid4()))
-    created_by: Mapped[str] = mapped_column(String(255), nullable=True)
-    updated_by: Mapped[str] = mapped_column(String(255), nullable=True)
+    id = Column(UUID, primary_key=True)
+    created_by = Column(UUID, nullable=True)
+    updated_by = Column(UUID, nullable=True)
     created_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), nullable=True,
                                                  default=func.now())
     updated_at: Mapped[DateTime] = mapped_column(DateTime(timezone=True), nullable=True,

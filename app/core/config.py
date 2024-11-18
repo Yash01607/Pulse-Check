@@ -40,6 +40,19 @@ class Settings(BaseSettings):
 
     @computed_field  # type: ignore[misc]
     @property
+    def DEFAULT_SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn:
+        return MultiHostUrl.build(
+            scheme="postgresql+asyncpg",
+            username=self.POSTGRES_USER,
+            password=urllib.parse.quote_plus(self.POSTGRES_PASSWORD),
+            host=self.POSTGRES_SERVER,
+            port=self.POSTGRES_PORT,
+            path=self.POSTGRES_DB,
+        )
+
+
+    @computed_field  # type: ignore[misc]
+    @property
     def DEFAULT_SQLALCHEMY_SYNC_DATABASE_URI(self) -> PostgresDsn:
         return MultiHostUrl.build(
             scheme="postgresql",

@@ -30,7 +30,7 @@ target_metadata = Base.metadata
 
 
 def get_database_uri():
-    return str(app_config.settings.DEFAULT_SQLALCHEMY_SYNC_DATABASE_URI)
+    return str(app_config.settings.DEFAULT_SQLALCHEMY_DATABASE_URI)
 
 
 def run_migrations_offline():
