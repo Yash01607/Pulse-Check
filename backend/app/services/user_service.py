@@ -12,7 +12,7 @@ from app.models.schemas.user import User as UserSchema, LoginResponse
 from app.utils.user import hash_password, verify_password, create_access_token
 
 
-async def create_user(email: str, password: str, db: AsyncSession = Depends(get_db)) -> User:
+async def create_user(email: str, password: str, name:str, db: AsyncSession = Depends(get_db)) -> User:
     user_query = select(
         User
     ).where(
@@ -24,7 +24,7 @@ async def create_user(email: str, password: str, db: AsyncSession = Depends(get_
         raise HTTPException(status_code=400, detail="Email already registered")
 
     hashed_password = hash_password(password)
-    new_user = User(email=email, password_hash=hashed_password)
+    new_user = User(email=email, password_hash=hashed_password, name=name)
     db.add(new_user)
     await db.commit()
     await db.refresh(new_user)
@@ -45,7 +45,7 @@ async def login_for_access_token(email: str, password: str, db: AsyncSession = D
 
     access_token_expires = timedelta(minutes=120)
     access_token = create_access_token(data={"sub": user_found.email}, expires_delta=access_token_expires)
-    return LoginResponse(token=access_token, email=email)
+    return LoginResponse(token=access_token, email=email, name=user_found.name)
 
 
 async def get_organizations(user_id: uuid.UUID, db: AsyncSession = Depends(get_db)) -> list[

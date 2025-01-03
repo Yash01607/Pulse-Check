@@ -2,10 +2,15 @@ from fastapi import APIRouter
 
 from app.api.endpoints import auth, organisation, user, service, incident
 
+
+def prepend_to_path(path: str):
+    return f"/api{path}"
+
+
 api_router = APIRouter()
 
-api_router.include_router(auth.router, prefix="", tags=["Authentication"])
-api_router.include_router(organisation.router, prefix="/organization", tags=["Organizations"])
-api_router.include_router(user.router, prefix="/user", tags=["Users"])
-api_router.include_router(service.router, prefix="/service", tags=["Services"])
-api_router.include_router(incident.router, prefix="/incident", tags=["Incidents"])
+api_router.include_router(auth.router, prefix=prepend_to_path(""), tags=["Authentication"])
+api_router.include_router(organisation.router, prefix=prepend_to_path("/organization"), tags=["Organizations"])
+api_router.include_router(user.router, prefix=prepend_to_path("/user"), tags=["Users"])
+api_router.include_router(service.router, prefix=prepend_to_path("/service"), tags=["Services"])
+api_router.include_router(incident.router, prefix=prepend_to_path("/incident"), tags=["Incidents"])
