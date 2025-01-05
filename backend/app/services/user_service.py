@@ -12,7 +12,10 @@ from app.models.schemas.user import User as UserSchema, LoginResponse
 from app.utils.user import hash_password, verify_password, create_access_token
 
 
-async def create_user(email: str, password: str, name:str, db: AsyncSession = Depends(get_db)) -> User:
+async def create_user(email: str, password1: str, password2: str, name: str,
+                      db: AsyncSession = Depends(get_db)) -> User:
+    if password1 != password2:
+        raise HTTPException(status_code=400, detail="Password and Confirm Password must match.")
     user_query = select(
         User
     ).where(
@@ -23,7 +26,7 @@ async def create_user(email: str, password: str, name:str, db: AsyncSession = De
     if user_found:
         raise HTTPException(status_code=400, detail="Email already registered")
 
-    hashed_password = hash_password(password)
+    hashed_password = hash_password(password1)
     new_user = User(email=email, password_hash=hashed_password, name=name)
     db.add(new_user)
     await db.commit()

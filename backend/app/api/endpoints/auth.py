@@ -11,7 +11,7 @@ router = APIRouter()
 @router.post("/signup", response_model=UserSchema, description="Create User")
 async def signup(request: CreateUserRequest, db: AsyncSession = Depends(get_db)) -> UserSchema:
     try:
-        user = await user_service.create_user(email=request.email, password=request.password, name=request.name, db=db)
+        user = await user_service.create_user(email=request.email, password1=request.password1, password2=request.password2, name=request.name, db=db)
         return user
     except Exception as e:
         print(f"Error in creating User: {(e)}")
