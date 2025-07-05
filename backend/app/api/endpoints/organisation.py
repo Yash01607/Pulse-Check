@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.db import get_db
 from app.core.deps import dependencies
 from app.models.schemas.organisation import Organisation as OrganisationSchema, CreateOrganisationRequest, \
-    UpdateOrganisationRequest
+    UpdateOrganisationRequest, OrganisationResponse
 from app.models.schemas.service import Service as ServiceSchema
 from app.services.organisation_service import create_organisation, get_organization, update_organization, \
     delete_organization, get_services_by_organization_id
@@ -23,7 +23,7 @@ async def create_organization_api(
     return db_organization
 
 
-@router.get("/services/{organization_id}", response_model=List[ServiceSchema], dependencies=dependencies,
+@router.get("/{organization_id}/services", response_model=List[ServiceSchema], dependencies=dependencies,
             description="Get Incidents by organization ID")
 async def get_organization_api(
         organization_id: uuid.UUID, db: AsyncSession = Depends(get_db)
@@ -34,7 +34,7 @@ async def get_organization_api(
     return db_incidents
 
 
-@router.get("/{organization_id}", response_model=OrganisationSchema, dependencies=dependencies,
+@router.get("/{organization_id}", response_model=OrganisationResponse, dependencies=dependencies,
             description="Get an organization by its ID")
 async def get_organization_api(
         organization_id: uuid.UUID, db: AsyncSession = Depends(get_db)

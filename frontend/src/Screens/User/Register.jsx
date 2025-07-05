@@ -56,19 +56,26 @@ const RegisterScreen = () => {
 
   return (
     <FormContainer>
-      <h1>Register</h1>
+      <Form
+        onSubmit={submitHandler}
+        className="p-4 rounded shadow-lg bg-dark"
+      >
+        <h1 className="text-center text-light mb-4">Register</h1>
 
-      {message && <Message error={true}>{message}</Message>}
-      {error && <Message error={true}>{error}</Message>}
-      {loading && <Loader>Registering User...</Loader>}
-      {userDataRegister && (
-        <Message error={true}>User Registered Successfully</Message>
-      )}
+        {message && <Message error={true}>{message}</Message>}
+        {error && <Message error={true}>{error}</Message>}
+        {loading && <Loader>Registering User...</Loader>}
+        {userDataRegister && (
+          <Message error={true}>User Registered Successfully</Message>
+        )}
 
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId="name">
-          <Form.Label>Name</Form.Label>
+        <Form.Group
+          className="mb-3"
+          controlId="name"
+        >
+          <Form.Label className="text-light">Name</Form.Label>
           <Form.Control
+            className="bg-secondary text-light border-0 rounded p-3"
             required
             type="name"
             placeholder="Enter Name"
@@ -77,9 +84,13 @@ const RegisterScreen = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId="email">
-          <Form.Label>Email Address</Form.Label>
+        <Form.Group
+          className="mb-3"
+          controlId="email"
+        >
+          <Form.Label className="text-light">Email Address</Form.Label>
           <Form.Control
+            className="bg-secondary text-light border-0 rounded p-3"
             required
             type="email"
             placeholder="Enter Email"
@@ -100,9 +111,13 @@ const RegisterScreen = () => {
           </div>
         </Form.Group>
 
-        <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
+        <Form.Group
+          className="mb-3"
+          controlId="password"
+        >
+          <Form.Label className="text-light">Password</Form.Label>
           <Form.Control
+            className="bg-secondary text-light border-0 rounded p-3"
             required
             type="password"
             placeholder="Enter Password"
@@ -123,9 +138,13 @@ const RegisterScreen = () => {
           </div>
         </Form.Group>
 
-        <Form.Group controlId="passwordConfirm">
-          <Form.Label>Confirm Password</Form.Label>
+        <Form.Group
+          className="mb-3"
+          controlId="passwordConfirm"
+        >
+          <Form.Label className="text-light">Confirm Password</Form.Label>
           <Form.Control
+            className="bg-secondary text-light border-0 rounded p-3"
             required
             type="password"
             placeholder="Confirm Password"

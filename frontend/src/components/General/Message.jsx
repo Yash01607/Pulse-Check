@@ -9,6 +9,12 @@ const Message = ({ children, success, error, key }) => {
           className="alert alert-danger alert-dismissible mt-3 pt-3"
         >
           {children}
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
         </div>
       )}
       {success && (
@@ -17,6 +23,12 @@ const Message = ({ children, success, error, key }) => {
           className="alert alert-success alert-dismissible pt-3 mt-3"
         >
           {children}
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
         </div>
       )}
     </>

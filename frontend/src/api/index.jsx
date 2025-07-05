@@ -16,3 +16,12 @@ API.interceptors.request.use((req) => {
 export const signIn = (formData) => API.post("/login", formData);
 
 export const register = (formData) => API.post("/signup", formData);
+
+export const getOrgsForUser = (userId) =>
+  API.get(`/user/${userId}/organisations`);
+
+export const getOrgData = (orgId) => API.get(`/organisation/${orgId}`);
+
+export const createOrg = (formData) => API.post(`/organisation`, formData);
+
+export const createService = (formData) => API.post(`/service`, formData);

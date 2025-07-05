@@ -12,12 +12,20 @@ from app.services.user_service import get_organizations
 router = APIRouter()
 
 
-@router.get("/{user_id}/organisations", response_model=List[OrganisationSchema], dependencies=dependencies,
-             description="Get Organisations for a User")
-async def get_user_organisations(user_id: uuid.UUID, db: AsyncSession = Depends(get_db)) -> List[OrganisationSchema]:
+@router.get(
+    "/{user_id}/organisations",
+    response_model=List[OrganisationSchema],
+    dependencies=dependencies,
+    description="Get Organisations for a User",
+)
+async def get_user_organisations(
+    user_id: uuid.UUID, db: AsyncSession = Depends(get_db)
+) -> List[OrganisationSchema]:
     try:
         organisations = await get_organizations(user_id=user_id, db=db)
         return organisations
     except Exception as e:
-        print(f"Error in creating User: {e}")
-        raise HTTPException(status_code=400, detail=f"Error in creating User: {str(e)}")
+        print(f"Error in getting User org info: {e}")
+        raise HTTPException(
+            status_code=500, detail=f"Error in getting User org info: {str(e)}"
+        )

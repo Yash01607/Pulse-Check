@@ -36,10 +36,6 @@ export const register = (userData, navigate) => async (dispatch) => {
       type: USER.REGISTER.REQUEST,
     });
 
-    console.log("iin actions");
-
-    console.log(userData);
-
     const { data } = await api.register(userData);
 
     dispatch({

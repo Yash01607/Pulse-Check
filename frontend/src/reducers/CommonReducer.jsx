@@ -1,5 +1,3 @@
-import { USER } from "../constants/index.jsx";
-
 const createReducer = (
   actionTypes,
   initialState = {
@@ -33,6 +31,4 @@ const createReducer = (
   };
 };
 
-export const userLoginReducer = createReducer(USER.LOGIN);
-export const userRegisterReducer = createReducer(USER.REGISTER);
-export const userLogoutReducer = createReducer(USER.LOGOUT);
+export default createReducer;

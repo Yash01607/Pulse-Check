@@ -5,30 +5,45 @@ const Footer = () => {
   return (
     <footer
       style={{
-        backgroundColor: "#343a40",
-        color: "#ffffff",
+        backgroundColor: "#212529", // Dark background
+        color: "#ffffff", // White text color
         padding: "40px 0",
       }}
     >
       <Container>
         <Row>
           <Col>
-            <h4>Contact Us</h4>
+            <h4 className="text-light">Contact Us</h4>
             <p>Email: info@simplishopee.com</p>
             <p>Phone: +91 99999 99999</p>
             <p>Address: 123 Main St, Hyderabad, Telangana, India</p>
           </Col>
           <Col>
-            <h4>Quick Links</h4>
+            <h4 className="text-light">Quick Links</h4>
             <ul>
               <li>
-                <a href="/">Home</a>
+                <a
+                  href="/"
+                  className="text-light"
+                >
+                  Home
+                </a>
               </li>
               <li>
-                <a href="/cart">Cart</a>
+                <a
+                  href="/cart"
+                  className="text-light"
+                >
+                  Cart
+                </a>
               </li>
               <li>
-                <a href="/profile">Profile</a>
+                <a
+                  href="/profile"
+                  className="text-light"
+                >
+                  Profile
+                </a>
               </li>
             </ul>
           </Col>
@@ -36,7 +51,7 @@ const Footer = () => {
             md={3}
             lg={3}
           >
-            <h4>Follow Us</h4>
+            <h4 className="text-light">Follow Us</h4>
             <Row>
               <Col>
                 <a
@@ -93,7 +108,7 @@ const Footer = () => {
         </Row>
         <Row>
           <div className="mt-5">
-            <p className="text-center">
+            <p className="text-center text-light">
               &copy; 2023 SimpliShopee. All rights reserved.
             </p>
           </div>
